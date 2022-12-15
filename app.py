@@ -15,5 +15,9 @@ def allagencias():
     data = api.allagencias()
     return render_template('agencias.html', data = data)
 
+@app.errorhandler(404)
+def error_404(e):
+    return '<h1>No source like your request.</h1>', 404
+
 if __name__ == '__main__':
     app.run(debug=True, port=7000)

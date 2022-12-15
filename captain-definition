@@ -6,6 +6,8 @@
 		"WORKDIR /app",
 		"RUN ls -a",
 		"RUN pip install -r requirements.txt",
-		"CMD [ \"gunicorn\", \"--bind\", \"0.0.0.0:5555\", \"wsgi:app\" ]"
+		"CMD [ \"gunicorn\", \"--bind\", \"0.0.0.0:5555\", \"wsgi:app\" ]",
+		"ARG SOME_ARG",
+		"ENV SOME_ENV=$SOME_ARG"
 	]
 }

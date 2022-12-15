@@ -1,0 +1,12 @@
+{% extends "model_page.html" %}
+{% block content %}
+
+{% for v  in data %}
+{{ v.nomeAgencia }}
+{{ v.endereco }}
+{{ v.telefone }}
+{{ v.idAgencia }}
+{% endfor %}
+
+<!-- nomeAgencia -->
+{% endblock %}

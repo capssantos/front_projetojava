@@ -19,8 +19,8 @@ def allagencias():
 @app.route('/removeagencia/<id>')
 def removeragencia(id):
     remove = api.removeragencia(id)
+    print(remove)
     if remove['msg'] == 'Agencia deletada com sucesso!':
-        sleep(5)
         flash('Agencia deletada com sucesso!')
         
         return redirect(url_for('allagencias'))

@@ -7,13 +7,17 @@
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/model_page.css') }}">
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/model_header.css') }}">        
         <!-- <script src="{{url_for('static', filename='javascript/model_header.js')}}" type="text/javascript"></script> -->
+    
+        <title>AGBanck</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     </head>
-
-
     <body>
-        
+
         {% include "model_header.html" %}
 
+        <div class="d-flex justify-content-center">
+            <img src="{{ url_for('static',filename='img/logo_banner.png') }}">
+        </div>
 
         <div class="container" id="grid-container">
             <div class="row">
@@ -22,8 +26,6 @@
                 </div>
             </div>
         </div>
-        
-        
         
         {% include "model_footer.html" %}
         

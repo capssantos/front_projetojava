@@ -1,8 +1,6 @@
-
-
 {% extends "model_page.html" %}
 {% block content %}
-
+<div class="agencia">
 <table class="table table-hover table-dark">
     <thead>
         <tr>
@@ -22,10 +20,23 @@
             <td>{{ v.endereco }}</td>
             <td>{{ v.telefone }}</td>
             <td>{{ v.idAgencia }}</td>
-            <td> AÇÕES </td>
+            <td>
+                <a href="removeagencia/{{ v.idAgencia }}">
+                    <button class="button button3">Excluir</button>
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-  
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <li><strong>{{ message }}</strong></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+</div>
 {% endblock %}

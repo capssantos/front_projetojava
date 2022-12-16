@@ -1,0 +1,73 @@
+{% extends "model_page.html" %}
+{% block content %}
+<div class="cadastroagencia">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-2"></div>
+        <div class="col-lg-20 col-md-12 login-box">
+            <div class="col-lg-12">
+                <p>LOGO</p>
+            </div>
+            <div class="col-lg-12 login-title">
+                Cadastar Novas Agencias:
+            </div>
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+                    <form action="{{ url_for('cadastroagencia') }}" method="post" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Nome da Agência *
+                                </label>
+                                <input type="text" class="form-control" name="nomeAgencia" id="nomeAgencia" placeholder="" value="" required="">
+                                <div class="invalid-feedback">
+                                    Nome da Agência, argumento necessário.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Endereço *
+                                </label>
+                                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="" value="" required="">
+                                <div class="invalid-feedback">
+                                    Endereço, argumento necessário.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Telefone *
+                                </label>
+                                <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="" value="" required="">
+                                <div class="invalid-feedback">
+                                    Telefone, argumento necessário.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 loginbttm">
+                            <div class="col-lg-6 login-btm login-text">
+                                {% with messages = get_flashed_messages()  %}
+                                {% if messages %}
+                                {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+
+                        </div>
+                        <div class="col-lg-12 login-btm login-button">
+                            <c<button type="submit" class="btn btn-outline-primary" >Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

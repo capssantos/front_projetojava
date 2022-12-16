@@ -1,11 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 body{
     background-color:#1C5C6C;
 }
 
+
 #grid-container {
     margin-top: 8%;
+    margin-bottom: 8%;
     height: auto;
     background: #1A2226;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.agencia table {
+    margin-top: 20px;
+}
+
+.agencia li {
+    padding: 0.5%;
+    background-color: green;
+    font-size: 20px;
+    text-decoration: azure, double;
+}
+
+.cadastroagencia div.container{
+    color: aliceblue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.cadastroagencia button {
+    font-weight: bold;
 }

@@ -37,6 +37,19 @@ def cadastroagencia():
 
     return render_template('cadastraragencia.html')
 
+@app.route('/cadastroagencia/<id>', methods=['GET', 'POST'])
+def alteraragencia():
+
+    if request.method == 'GET':
+        return render_template('cadastraragencia.html')
+    if request.method == 'POST':
+        nomeagencia = request.form['nomeAgencia']
+        endereco = request.form['endereco']
+        telefone = request.form['telefone']
+        new = api.registaragencia(nomeagencia, endereco, telefone)
+        flash('Agencia ID:{idagencia}, cadastrada com sucesso!'.format(idagencia = new['idAgencia']))
+        return redirect(url_for('allagencias'))
+
 @app.errorhandler(404)
 def error_404(e):
     return '<h1>No source like your request.</h1>', 404

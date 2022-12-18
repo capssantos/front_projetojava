@@ -1,6 +1,16 @@
 {% extends "model_page.html" %}
 {% block content %}
 <div class="agencia">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 login-title">
+            <h3>
+                Agencias Cadastradas
+            </h3>
+            <hr>
+        </div>
+    </div>
+</div>
 <table class="table table-hover table-dark">
     <thead>
         <tr>
@@ -22,7 +32,7 @@
             <td>{{ v.idAgencia }}</td>
             <td>
                 <a href="removeagencia/{{ v.idAgencia }}">
-                    <button class="button button3">Excluir</button>
+                    <button type="button" class="btn btn-danger">Excluir</button>
                 </a>
             </td>
         </tr>

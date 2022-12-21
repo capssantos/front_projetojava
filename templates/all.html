@@ -5,13 +5,31 @@
     <div class="row">
         <div class="col-lg-12 login-title">
             {% if page == 'agencia' %}
-            <h3>
-                Agencias Cadastradas
-            </h3>
+            <div class="row">
+                <div class="col-md-6 mb-3" style="display: flex; justify-content:flex-start;">
+                    <h3>
+                        Agencias Cadastradas
+                    </h3>
+                </div>
+                <div class="col-md-6 mb-3" style="display: flex; justify-content:flex-end;">
+                    <a href="{{ url_for('cadastroagencia') }}">
+                    <button type="button" class="btn btn-success" >Nova Agencia</button>
+                    </a>
+                </div>
+            </div>
             {% elif page == 'cliente' %}
-            <h3>
-                Clientes Cadastradas
-            </h3>
+            <div class="row">
+                <div class="col-md-6 mb-3" style="display: flex; justify-content:flex-start;">
+                    <h3>
+                        Clientes Cadastradas
+                    </h3>
+                </div>
+                <div class="col-md-6 mb-3" style="display: flex; justify-content:flex-end;">
+                    <a href="{{ url_for('cadastrocliente') }}">
+                    <button type="button" class="btn btn-success" >Novo Cliente</button>
+                    </a>
+                </div>
+            </div>
             {% else %}
             <h3>
                 ------ NONE -------
@@ -41,7 +59,7 @@
             <td>{{ v.telefone }}</td>
             <td>
                 <a href="cadastroagencia/{{ v.idAgencia }}">
-                    <button type="button" class="btn btn-warning">Editar</button>
+                    <button type="button" class="btn btn-primary">Editar</button>
                 </a>
 
                 <a href="removeagencia/{{ v.idAgencia }}">
@@ -75,7 +93,7 @@
             <td>{{ v.idAgencia }}</td>
             <td>
                 <a href="cadastrocliente/{{ v.idCliente }}">
-                    <button type="button" class="btn btn-warning">Editar</button>
+                    <button type="button" class="btn btn-primary">Editar</button>
                 </a>
 
                 <a href="removecliente/{{ v.idCliente }}">
@@ -97,11 +115,9 @@
 </table>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul class=flashes>
     {% for message in messages %}
-        <li><strong>{{ message }}</strong></li>
+        <strong><p class="flashes">{{ message }}</p></strong>
     {% endfor %}
-    </ul>
 {% endif %}
 {% endwith %}
 </div>

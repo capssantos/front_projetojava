@@ -58,3 +58,11 @@ hr {
 input {
     text-align: center;
 }
+
+.flashes{
+    background-color: #025a05;
+    color: aliceblue;
+    margin-left: 0;
+    margin-right: 0;
+
+}

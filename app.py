@@ -47,14 +47,16 @@ def alteraragencia(id):
 
     if request.method == 'GET':
         agencia = api.agencia(id)
+        print(agencia)
         return render_template('cadastro.html', page = 'agencia',
                                                 nomeagencia = agencia['nomeAgencia'],
                                                 endereco = agencia['endereco'],
                                                 telefone = agencia['telefone'],
-                                                idagencia = agencia['idAgencia'])
+                                                idagencia = str(agencia['idAgencia']))
 
     if request.method == 'POST':
-        idagencia = request.form['idAgencia']
+        print(request)
+        idagencia = id
         nomeagencia = request.form['nomeAgencia']
         endereco = request.form['endereco']
         telefone = request.form['telefone']
@@ -83,15 +85,18 @@ def cadastrocliente():
         clientenome = request.form['clienteNome']
         clientecpf = request.form['clienteCPF']
         clientefone = request.form['clienteFone']
-        idagencia = request.form['idAgencia']
+        idagencia = request.form['idagencia'].split(' ')[0]
         
         conta = api.registarconta(idagencia, randrange(1000,10000,2), '0.0')
 
         idcontacorrente = conta['idContaCorrente']
         
         new = api.registarcliente(clientenome, clientecpf, clientefone, idcontacorrente, idagencia)
+
         flash('Cliente ID:{idagencia}, Conta Numero: {contaCorrenteNumero}, cadastrada com sucesso!'.format(idagencia = new['idCliente'], contaCorrenteNumero = conta['contaCorrenteNumero']))
         return redirect(url_for('allcliente'))
+
+    agencias = api.allagencia_id()
 
     return render_template('cadastro.html', page = 'cliente',
                                             clientenome = '',
@@ -99,7 +104,8 @@ def cadastrocliente():
                                             clientefone = '',
                                             idcontacorrente = '',
                                             idagencia = '',
-                                            idcliente = ''
+                                            idcliente = '',
+                                            agencias = agencias
                                             )
 
 @app.route('/cadastrocliente/<id>', methods=['GET', 'POST'])
@@ -109,7 +115,7 @@ def alterarcliente(id):
         cliente = api.cliente(id)
         conta = api.conta(str(cliente['idContaCorrente']))
         return render_template('cadastro.html', page = 'cliente',
-                                                clientenome = cliente['clienteNome'],
+                                                clientenome = id,
                                                 clientecpf = cliente['clienteCPF'],
                                                 clientefone = cliente['clienteFone'],
                                                 idcontacorrente = cliente['idContaCorrente'],
@@ -120,12 +126,16 @@ def alterarcliente(id):
                                                 )
 
     if request.method == 'POST':
-        idagencia = request.form['idAgencia']
-        nomeagencia = request.form['nomeAgencia']
-        endereco = request.form['endereco']
-        telefone = request.form['telefone']
-        new = api.atualizaragencia(idagencia, nomeagencia, endereco, telefone)
-        flash('Agencia ID:{idagencia}, autalizado com sucesso!'.format(idagencia = new['idAgencia']))
+        clientenome = id,
+        clientecpf = cliente['clienteCPF'],
+        clientefone = cliente['clienteFone'],
+        idcontacorrente = cliente['idContaCorrente'],
+        idagencia = cliente['idAgencia'],
+        idcliente = cliente['idCliente'],
+        contacorrentenumero = conta['contaCorrenteNumero'],
+        contacorrentesaldo = conta['contaCorrenteSaldo'],
+        # new = api.atualizaragencia(idagencia, nomeagencia, endereco, telefone)
+        # flash('Agencia ID:{idagencia}, autalizado com sucesso!'.format(idagencia = new['idAgencia']))
         return redirect(url_for('allcliente'))
 # END - CLIENTE - ROTAS E CONTROLLERS
 #-------------------------------------------------------------
@@ -136,6 +146,36 @@ def alterarcliente(id):
 # START - EXTRATO - ROTAS E CONTROLLERS
 
 # END - EXTRATO - ROTAS E CONTROLLERS
+#-------------------------------------------------------------
+@app.route('/movimentacao', methods=['GET', 'POST'])
+# START - MOVIMENTAÇÃO - ROTAS E CONTROLLERS
+def movimentacao():
+    contas = api.allcliente_id()
+    return render_template('movimentacao.html', page = 'select',
+                                                contas = contas)
+
+@app.route('/mover', methods=['GET', 'POST'])
+# START - MOVIMENTAÇÃO - ROTAS E CONTROLLERS
+def sendmovimentacao():
+    id_cliente = request.form['idConta'].split(' ')[2]
+
+    cliente = api.cliente(str(id_cliente))
+    print(cliente)
+    conta = api.conta(str(cliente['idContaCorrente']))
+    print(conta)
+    if request.method == 'POST':
+        return render_template('movimentacao.html', page = 'mover',
+                                                    idcliente = cliente['idCliente'],
+                                                    clientenome = cliente['clienteNome'],
+                                                    clientecpf = cliente['clienteCPF'],
+                                                    clientefone = cliente['clienteFone'],
+                                                    idcontacorrente = cliente['idContaCorrente'],
+                                                    idagencia = cliente['idAgencia'],
+                                                    contacorrentenumero = str(conta['contaCorrenteNumero'])+' - 0',
+                                                    saldo = 'R$'+str(conta['contaCorrenteSaldo']).replace('.',','))
+
+
+# END - MOVIMENTAÇÃO - ROTAS E CONTROLLERS
 #-------------------------------------------------------------
 @app.errorhandler(404)
 def error_404(e):

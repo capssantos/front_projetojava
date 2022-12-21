@@ -1,0 +1,29 @@
+{% extends "model_page.html" %}
+{% block content %}
+<form action="{{ url_for('sendmovimentacao') }}" method="post" autocomplete="off">
+    <div class="col-md-6 mb-3">
+        <label class="form-control-label">
+            Escolha a Conta Bancária *
+        </label>
+        <select class="form-control" name="idConta" id="idConta" onchange="this.form.submit()">
+            <option>--- Selecione a Conta ---</option>
+            {% for conta in contas %}
+            <option>{{ conta }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+{% if page == 'mover' %}
+
+{{ idcliente }}
+{{ clientenome }}
+{{ clientecpf }}
+{{ clientefone }}
+{{ idcontacorrente }}
+{{ idagencia }}
+{{ contacorrentenumero }}
+{{ saldo }}
+
+
+{% endif %}
+{% endblock %}

@@ -6,160 +6,219 @@
             <div class="col-lg-10 col-md-2"></div>
             <div class="col-lg-20 col-md-12 login-box">
                 <div class="col-lg-12 login-title">
-                    {% if page == 'agencia' %}
-                        {% if idagencia != '' %}
-                        <h3>
-                            Autalizar Agencia:
-                        </h3>
-                        {% else %}
-                        <h3>
-                            Cadastar Novas Agencias:
-                        </h3>
-                        {% endif %}
-                    {% elif page == 'cliente' %}
-                        {% if idcliente != '' %}
-                        <h3>
-                            Autalizar Cliente:
-                        </h3>
-                        {% else %}
-                        <h3>
-                            Cadastar Novos Clientes:
-                        </h3>
-                        {% endif %}
-                    {% else %}
-                        <h3>
-                            ------ NONE -------
-                        </h3>
-                    {% endif %}
 
+                {% if page == 'agencia' %}
+                {% if idagencia != '' %}
+                    <h3>
+                    Autalizar Agencia:
+                    </h3>
                     <hr>
-                </div>
-                <div class="col-lg-12 login-form">
-                    <div class="col-lg-12 login-form">
-                        {% if page == 'agencia' %}
-                        <form action="{{ url_for('cadastroagencia') }}" method="post" autocomplete="off">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Nome da Agência *
-                                    </label>
-                                    <input type="text" class="form-control" name="nomeAgencia" id="nomeAgencia" placeholder="" value="{{ nomeagencia }}" required oninvalid="this.setCustomValidity('Nome da Agência, argumento necessário.')">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Endereço *
-                                    </label>
-                                    <input type="text" class="form-control" name="endereco" id="endereco" placeholder="" value="{{ endereco }}" required oninvalid="this.setCustomValidity('Endereço, argumento necessário.')">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Telefone *
-                                    </label>
-                                    <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="" value="{{ telefone }}" required oninvalid="this.setCustomValidity('Telefone, argumento necessário.')">
-                                </div>
-                                {% if idagencia != '' %}
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        ID da Agencia
-                                    </label>
-                                    <input type="text" class="form-control" name="idAgencia" id="idAgencia" placeholder="" value="{{ idagencia }}" disabled="">
-                                </div>
-                                {% endif %}
+                    <form action="{{ url_for('alteraragencia', id = idagencia) }}" method="post" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Nome da Agência *
+                                </label>
+                                <input type="text" class="form-control" name="nomeAgencia" id="nomeAgencia" placeholder="" value="{{ nomeagencia }}" required oninvalid="this.setCustomValidity('Nome da Agência, argumento necessário.')">
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Endereço *
+                                </label>
+                                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="" value="{{ endereco }}" required oninvalid="this.setCustomValidity('Endereço, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Telefone *
+                                </label>
+                                <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="" value="{{ telefone }}" required oninvalid="this.setCustomValidity('Telefone, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    ID da Agencia
+                                </label>
+                                <input type="text" class="form-control" name="idAgencia" id="idAgencia" placeholder="" value="{{ idagencia }}" disabled="">
                             </div>
                             <div class="container">
                                 <div class="row">
-                                    {% if idagencia != '' %}
-                                    <div class="col-md-8 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <button type="submit" class="btn btn-outline-warning" >Autalizar</button>
                                     </div>
-                                    {% else %}
-                                    <div class="col-md-8 mb-3">
-                                        <button type="submit" class="btn btn-outline-primary" >Cadastrar</button>
+                                    <div class="col-md-6 mb-3">
+                                        <a href="{{ url_for('allagencias') }}">
+                                            <button type="button" class="btn btn-outline-secondary" onclick="cancel_form()">Cancelar</button>
+                                        </a>
                                     </div>
-                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                {% else %}
+                    <h3>
+                    Cadastar Novas Agencias:
+                    </h3>
+                    <hr>
+                    <form action="{{ url_for('cadastroagencia') }}" method="post" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Nome da Agência *
+                                </label>
+                                <input type="text" class="form-control" name="nomeAgencia" id="nomeAgencia" placeholder="" value="{{ nomeagencia }}" required oninvalid="this.setCustomValidity('Nome da Agência, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Endereço *
+                                </label>
+                                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="" value="{{ endereco }}" required oninvalid="this.setCustomValidity('Endereço, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Telefone *
+                                </label>
+                                <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="" value="{{ telefone }}" required oninvalid="this.setCustomValidity('Telefone, argumento necessário.')">
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <button type="submit" class="btn btn-outline-primary" >Cadastrar</button>
+                                </div>
+                                <div class="col-md-6 mb-3">
                                     <a href="{{ url_for('allagencias') }}">
-                                        <div class="col-md-1 mb-1">
-                                            <button type="button" class="btn btn-outline-secondary" onclick="cancel_form()">Cancelar</button>
-                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="cancel_form()">Cancelar</button>
                                     </a>
                                 </div>
                             </div>
-                        </form>
-<!-- -------------------------------------------------------------------------------- -->
-                        {% elif page == 'cliente' %}
-                        <form action="{{ url_for('cadastrocliente') }}" method="post" autocomplete="off">
+                        </div>
+                    </form>
+                {% endif %}
+<!-- ----------------------------------------------------------------------------------------------------------------------- -->
+                {% elif page == 'cliente' %}
+                {% if idcliente != '' %}
+                    <h3>
+                    Autalizar Cliente:
+                    </h3>
+                    <hr>
+                    
+                    <form action="{{ url_for('alterarcliente', id = idcliente) }}" method="post" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Nome Completo *
+                                </label>
+                                <input type="text" class="form-control" name="clienteNome" id="clienteNome" placeholder="" value="{{ clientenome }}" required oninvalid="this.setCustomValidity('Nome da Agência, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    CPF *
+                                </label>
+                                <input type="text" class="form-control" name="clienteCPF" id="clienteCPF" placeholder="" value="{{ clientecpf }}" required oninvalid="this.setCustomValidity('Endereço, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Telefone *
+                                </label>
+                                <input type="tel" class="form-control" name="clienteFone" id="clienteFone" placeholder="" value="{{ clientefone }}" required oninvalid="this.setCustomValidity('Telefone, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Escolha a Agencia *
+                                </label>
+                                <select class="form-control" name="idagencia" id="idagencia">
+                                    {% for agencia in agencias %}
+                                    <option>{{ agencia }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    ID da Cliente
+                                </label>
+                                <input type="text" class="form-control" name="idCliente" id="idCliente" placeholder="" value="{{ idcliente }}" disabled="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Numero Conta Corrente
+                                </label>
+                                <input type="text" class="form-control" name="contaCorrenteNumero" id="contaCorrenteNumero" placeholder="" value="{{ contacorrentenumero }}" disabled="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Saldo em Conta
+                                </label>
+                                <input type="text" class="form-control" name="contaCorrenteSaldo" id="contaCorrenteSaldo" placeholder="" value="{{ contacorrentesaldo }}" disabled="">
+                            </div>
+                        </div>
+                        <div class="container">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Seu Nome: *
-                                    </label>
-                                    <input type="text" class="form-control" name="clienteNome" id="clienteNome" placeholder="" value="{{ clientenome }}" required oninvalid="this.setCustomValidity('Nome Completo necessário.')">
+                                    <button type="submit" class="btn btn-outline-warning" >Autalizar</button>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        CPF: *
-                                    </label>
-                                    <input type="text" class="form-control" name="clienteCPF" id="clienteCPF" placeholder="" value="{{ clientecpf }}" required oninvalid="this.setCustomValidity('CPF necessário.') ">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Telefone: *
-                                    </label>
-                                    <input type="text" class="form-control" name="clienteFone" id="clienteFone" placeholder="" value="{{ clientefone }}" required oninvalid="this.setCustomValidity('Telefone necessário.')">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Agencia: *
-                                    </label>
-                                    <input type="text" class="form-control" name="idAgencia" id="idAgencia" placeholder="" value="{{ idagencia }}" required oninvalid="this.setCustomValidity('Telefone necessário.')">
-                                </div>
-                                {% if idcliente != '' %}
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        ID da Cliente
-                                    </label>
-                                    <input type="text" class="form-control" name="idCliente" id="idCliente" placeholder="" value="{{ idcliente }}" disabled="">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Numero Conta Corrente
-                                    </label>
-                                    <input type="text" class="form-control" name="contaCorrenteNumero" id="contaCorrenteNumero" placeholder="" value="{{ contacorrentenumero }}" disabled="">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-control-label">
-                                        Saldo em Conta
-                                    </label>
-                                    <input type="text" class="form-control" name="contaCorrenteSaldo" id="contaCorrenteSaldo" placeholder="" value="{{ contacorrentesaldo }}" disabled="">
-                                </div>
-                                {% endif %}
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    {% if idcliente != '' %}
-                                    <div class="col-md-8 mb-3">
-                                        <button type="submit" class="btn btn-outline-warning" >Autalizar</button>
-                                    </div>
-                                    {% else %}
-                                    <div class="col-md-8 mb-3">
-                                        <button type="submit" class="btn btn-outline-primary" >Cadastrar</button>
-                                    </div>
-                                    {% endif %}
                                     <a href="{{ url_for('allcliente') }}">
-                                        <div class="col-md-1 mb-1">
-                                            <button type="button" class="btn btn-outline-secondary" onclick="cancel_form()">Cancelar</button>
-                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="cancel_form()">Cancelar</button>
                                     </a>
                                 </div>
                             </div>
-                        </form>
-                        {% else %}
-                        <h3>
-                            ------ NONE -------
-                        </h3>
-                        {% endif %}
-                    </div>
+                        </div>
+                    </form>
+                {% else %}
+                    <h3>
+                    Cadastar Novos Clientes:
+                    </h3>
+                    <hr>
+                    <form action="{{ url_for('cadastrocliente') }}" method="post" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Nome Completo *
+                                </label>
+                                <input type="text" class="form-control" name="clienteNome" id="clienteNome" placeholder="" value="{{ clientenome }}" required oninvalid="this.setCustomValidity('Nome da Agência, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    CPF *
+                                </label>
+                                <input type="text" class="form-control" name="clienteCPF" id="clienteCPF" placeholder="" value="{{ clientecpf }}" required oninvalid="this.setCustomValidity('Endereço, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Telefone *
+                                </label>
+                                <input type="tel" class="form-control" name="clienteFone" id="clienteFone" placeholder="" value="{{ clientefone }}" required oninvalid="this.setCustomValidity('Telefone, argumento necessário.')">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-control-label">
+                                    Escolha a Agencia *
+                                </label>
+                                <select class="form-control" name="idagencia" id="idagencia">
+                                    {% for agencia in agencias %}
+                                    <option>{{ agencia }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <button type="submit" class="btn btn-outline-primary" >Cadastrar</button>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <a href="{{ url_for('allcliente') }}">
+                                        <button type="button" class="btn btn-outline-secondary" onclick="cancel_form()">Cancelar</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                {% endif %}
+                {% else %}
+                    <h3>
+                    ------ NONE -------
+                    </h3>
+                {% endif %}
                 </div>
             </div>
         </div>

@@ -14,6 +14,14 @@ class Api(object):
         res = json.loads(res.text)
         return res
 
+    def allagencia_id(self):
+        res = req.get(url=self.url+'allagencias')
+        res = json.loads(res.text)
+        lista = []
+        for i in res:
+            lista.append(str(i['idAgencia'])+' - '+i['nomeAgencia'])
+        return lista
+
     def removeragencia(self, id):
         res = req.delete(url=self.url+'removeragencia/'+id, headers=self.headers)
         res = json.loads(res.text)
@@ -53,6 +61,15 @@ class Api(object):
         res = json.loads(res.text)
         return res
 
+    def allcliente_id(self):
+        res = req.get(url=self.url+'allclientes')
+        res = json.loads(res.text)
+        lista = []
+        for i in res:
+            conta = self.conta(str(i['idContaCorrente']))
+            lista.append('ID Cliente: '+str(i['idCliente'])+' '+'000'+str(i['idAgencia'])+' '+str(conta['contaCorrenteNumero'])+' - 0 | Cliente: '+i['clienteNome'])
+        return lista
+
     def removercliente(self, id):
         res = req.delete(url=self.url+'removercliente/'+id, headers=self.headers)
         res = json.loads(res.text)
@@ -72,6 +89,21 @@ class Api(object):
         res = json.loads(res.text)
         return res
 
+    def atualizarcliente(self, idcliente, clientenome, clientecpf, clientefone, idcontacorrente, idagencia):
+        query = '{ \"idCliente\":%(idcliente)s, \"clienteNome\":%(clientenome)s, \"clienteCPF\": %(clientecpf)s, \"clienteFone\":%(clientefone)s, \"idContaCorrente\":%(idcontacorrente)s, \"idAgencia\":%(idagencia)s  }' % {
+        "idcliente": json.dumps(idcliente),
+        "clientenome": json.dumps(clientenome),
+        "clientecpf": json.dumps(clientecpf),
+        "clientefone": json.dumps(clientefone),
+        "idcontacorrente": json.dumps(idcontacorrente),
+        "idagencia": json.dumps(idagencia),
+        "idagencia": json.dumps(idagencia)
+        }
+        query = json.loads(query)
+        res = req.put(url=self.url+'alterarcliente', json=query, headers=self.headers)
+        res = json.loads(res.text)
+        return res
+
     def cliente(self, id_cliente):
         res = req.get(url=self.url+'cliente/'+ id_cliente)
         res = json.loads(res.text)
@@ -80,8 +112,22 @@ class Api(object):
 
     # END - CLIENTE - ROTAS E CONTROLLERS
     # START - CONTA - ROTAS E CONTROLLERS
+
+
     def registarconta(self, idagencia, contacorrentenumero, contacorrentesaldo):
         query = '{\"idAgencia\":%(idagencia)s, \"contaCorrenteNumero\": %(contacorrentenumero)s, \"contaCorrenteSaldo\":%(contacorrentesaldo)s }' % {
+            "idagencia": json.dumps(idagencia),
+            "contacorrentenumero": json.dumps(contacorrentenumero),
+            "contacorrentesaldo": json.dumps(contacorrentesaldo)
+        }
+        query = json.loads(query)
+        res = req.post(url=self.url+'cadastratarconta', json=query, headers=self.headers)
+        res = json.loads(res.text)
+        return res
+
+    def alterarconta(self, idcontacorrente, idagencia, contacorrentenumero, contacorrentesaldo):
+        query = '{\"idContaCorrente\":%(idcontacorrente)s, \"idAgencia\":%(idagencia)s, \"contaCorrenteNumero\": %(contacorrentenumero)s, \"contaCorrenteSaldo\":%(contacorrentesaldo)s }' % {
+            "idcontacorrente": json.dumps(idcontacorrente),
             "idagencia": json.dumps(idagencia),
             "contacorrentenumero": json.dumps(contacorrentenumero),
             "contacorrentesaldo": json.dumps(contacorrentesaldo)
@@ -100,3 +146,9 @@ class Api(object):
     # START - EXTRATO - ROTAS E CONTROLLERS
 
     # END - EXTRATO - ROTAS E CONTROLLERS
+
+    # START - FULL - ROTAS E CONTROLLERS
+
+
+
+    # END - FULL - ROTAS E CONTROLLERS

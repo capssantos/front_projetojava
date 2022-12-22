@@ -76,12 +76,11 @@ class Api(object):
         return res
 
     def registarcliente(self, clientenome, clientecpf, clientefone, idcontacorrente, idagencia):
-        query = '{ \"clienteNome\":%(clientenome)s, \"clienteCPF\": %(clientecpf)s, \"clienteFone\":%(clientefone)s, \"idContaCorrente\":%(idcontacorrente)s, \"idAgencia\":%(idagencia)s  }' % {
+        query = '{\"clienteCPF\": %(clientenome)s,\"clienteFone\": :%(clientefone)s,\"clienteNome\": %(clientenome)s,\"idAgencia\": {\"idAgencia\":%(idagencia)s},\"idContaCorrente\": {\"idAgencia\": {\"idAgencia\": %(idagencia)s},\"idContaCorrente\": %(idcontacorrente)s} }' % {
             "clientenome": json.dumps(clientenome),
             "clientecpf": json.dumps(clientecpf),
             "clientefone": json.dumps(clientefone),
             "idcontacorrente": json.dumps(idcontacorrente),
-            "idagencia": json.dumps(idagencia),
             "idagencia": json.dumps(idagencia)
         }
         query = json.loads(query)
@@ -112,13 +111,10 @@ class Api(object):
 
     # END - CLIENTE - ROTAS E CONTROLLERS
     # START - CONTA - ROTAS E CONTROLLERS
-
-
-    def registarconta(self, idagencia, contacorrentenumero, contacorrentesaldo):
-        query = '{\"idAgencia\":%(idagencia)s, \"contaCorrenteNumero\": %(contacorrentenumero)s, \"contaCorrenteSaldo\":%(contacorrentesaldo)s }' % {
+    def registarconta(self, idagencia, contacorrentenumero):
+        query = '{\"contaCorrenteNumero\": %(contacorrentenumero)s, \"idAgencia\": {\"idAgencia\": %(idagencia)s},\"saldo\": 0}' % {
             "idagencia": json.dumps(idagencia),
             "contacorrentenumero": json.dumps(contacorrentenumero),
-            "contacorrentesaldo": json.dumps(contacorrentesaldo)
         }
         query = json.loads(query)
         res = req.post(url=self.url+'cadastratarconta', json=query, headers=self.headers)

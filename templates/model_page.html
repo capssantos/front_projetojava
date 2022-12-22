@@ -14,19 +14,18 @@
     <body>
 
         {% include "model_header.html" %}
-
         <div class="d-flex justify-content-center">
-            <img src="{{ url_for('static',filename='img/logo_banner.png') }}">
+            <img src="{{ url_for('static',filename='img/logo_banner.png') }}" width="40%">
         </div>
 
-        <div class="container" id="grid-container">
+        <div class="container" id="grid-container" media="screen and (max-width: 400px)">
             <div class="row">
                 <div class="col">
                     {% block content %} {% endblock %}
                 </div>
             </div>
         </div>
-        
+        </div>
         {% include "model_footer.html" %}
         
     </body> 

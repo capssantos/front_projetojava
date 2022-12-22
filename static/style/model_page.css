@@ -1,4 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@media screen and (max-width: 400px) {
+    div.media {
+        display: none;
+    }
+}
+@media screen and (max-width: 399px) {
+    div.media2 {
+        display: none;
+    }
+}
+
 body{
     background-color:#1C5C6C;
 }

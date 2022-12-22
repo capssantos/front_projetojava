@@ -87,7 +87,7 @@ def cadastrocliente():
         clientefone = request.form['clienteFone']
         idagencia = request.form['idagencia'].split(' ')[0]
         
-        conta = api.registarconta(idagencia, randrange(1000,10000,2), '0.0')
+        conta = api.registarconta(idagencia, randrange(1000,10000,2))
 
         idcontacorrente = conta['idContaCorrente']
         

@@ -77,7 +77,8 @@
             <th scope="col">Nome do Clinete</th>
             <th scope="col">CPF</th>
             <th scope="col">Telefone</th>
-            <th scope="col">ID Conta Corrente</th>
+            <th scope="col">Numero Conta Correte</th>
+            <th scope="col">Saldo</th>
             <th scope="col">ID Agencia</th>
             <th scope="col">Opções</th>
         </tr>
@@ -89,8 +90,9 @@
             <td>{{ v.clienteNome }}</td>
             <td>{{ v.clienteCPF }}</td>
             <td>{{ v.clienteFone }}</td>
-            <td>{{ v.idContaCorrente }}</td>
-            <td>{{ v.idAgencia }}</td>
+            <td>{{ v.idContaCorrente.contaCorrenteNumero }}</td>
+            <td>{{ v.idContaCorrente.saldo }}</td>
+            <td>{{ v.idAgencia.idAgencia }}</td>
             <td>
                 <a href="cadastrocliente/{{ v.idCliente }}">
                     <button type="button" class="btn btn-primary">Editar</button>
